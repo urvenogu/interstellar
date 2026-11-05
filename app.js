@@ -438,7 +438,7 @@ if (typeof document !== "undefined") {
       .querySelectorAll(".slots i")
       .forEach((slot, index) => slot.classList.toggle("empty", index >= count));
     document.querySelector("#packing-status").textContent = !destination
-      ? "Vali kõigepealt planeet."
+      ? ""
       : count === 5
         ? "Seljakott on valmis! Vaata oma reisi tulemust."
         : `Vali veel ${5 - count} eset.`;
