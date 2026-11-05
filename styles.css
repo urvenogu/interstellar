@@ -3,13 +3,15 @@
   color-scheme: dark;
   --orange: #ff7b00;
   --mint: #00ffb7;
-  background: #252637;
+  background: #090f24;
   font-family: Jura, sans-serif;
 }
 * {
   box-sizing: border-box;
 }
 body {
+  min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
   position: relative;
   isolation: isolate;
@@ -35,31 +37,7 @@ p {
   overflow: hidden;
   padding-top: 162px;
 }
-.cosmos {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-.cosmos > div {
-  height: 2559px;
-  position: relative;
-  overflow: hidden;
-}
-.cosmos img {
-  position: absolute;
-  width: 2559px;
-  height: 1440px;
-  max-width: none;
-  left: 50%;
-  top: 50%;
-  object-fit: cover;
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
-.cosmos > div + div img {
-  transform: translate(-50%, -50%) rotate(90deg) scaleY(-1);
-}
+
 header {
   text-align: center;
   margin: auto;
@@ -314,13 +292,7 @@ h1 {
     padding-top: 11.25vw;
     min-height: 355.4167vw;
   }
-  .cosmos > div {
-    height: 177.7083vw;
-  }
-  .cosmos img {
-    width: 177.7083vw;
-    height: 100vw;
-  }
+
   header {
     width: 59.722vw;
   }
@@ -420,14 +392,7 @@ h1 {
     min-height: 100svh;
     padding-bottom: 100px;
   }
-  .cosmos > div {
-    height: 177.7083vw;
-    min-height: 1000px;
-  }
-  .cosmos img {
-    width: 1777px;
-    height: 1000px;
-  }
+
   .eyebrow {
     font-size: clamp(12px, 3vw, 21px);
     line-height: 2;
@@ -598,17 +563,6 @@ h1 {
   }
 }
 
-/* Taust ulatub laia ekraani servadeni, sisu jääb 1440 px laiuseks. */
-@media (min-width: 1440px) {
-  .cosmos > div {
-    height: 177.708333vw;
-  }
-  .cosmos img {
-    width: 177.708333vw;
-    height: 100vw;
-  }
-}
-
 /* Planeet ja tema infoaken liiguvad ühise elemendina. */
 .planet {
   animation: planet-float var(--float-duration, 20s) ease-in-out var(--float-delay, 0s)
@@ -759,12 +713,7 @@ h1 {
   width: auto;
   height: auto;
   margin: 0;
-  background-image: linear-gradient(
-  to right,
-  #00FFFB 0%,
-  #8968FF 50%,
-  #FF5100 100%
-  );
+  background-image: linear-gradient(to right, #00fffb 0%, #8968ff 50%, #ff5100 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -850,4 +799,28 @@ h1 {
     margin-inline: 6%;
     padding: 32px 0 60px;
   }
+}
+
+/* Kogu ekraani kattev taust ei sõltu lehe pikkusest.
+   Vana .cosmos HTML-plokk võib alles jääda, sest peidame selle. */
+.cosmos {
+  display: none;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vh;
+  width: 100dvh;
+  height: 100vw;
+  transform: translate(-50%, -50%) rotate(90deg);
+  z-index: -1;
+  pointer-events: none;
+
+  background-color: #090f24;
+  background-image: url("assets/background.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
