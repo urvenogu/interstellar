@@ -3,15 +3,13 @@
   color-scheme: dark;
   --orange: #ff7b00;
   --mint: #00ffb7;
-  background: #090f24;
+  background: #252637;
   font-family: Jura, sans-serif;
 }
 * {
   box-sizing: border-box;
 }
 body {
-  min-height: 100vh;
-  min-height: 100svh;
   margin: 0;
   position: relative;
   isolation: isolate;
@@ -62,6 +60,39 @@ p {
 .cosmos > div + div img {
   transform: translate(-50%, -50%) rotate(90deg) scaleY(-1);
 }
+
+.logo-container {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 280px;
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  width: 400px;
+  height: auto;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.links p {
+  display: 0;
+}
+
+.links a {
+  text-decoration: none;
+  color: white;
+}
+
 header {
   text-align: center;
   margin: auto;
@@ -335,6 +366,32 @@ img {
     width: 177.7083vw;
     height: 100vw;
   }
+
+
+
+
+  .logo-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  .links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+
+
+
+
   header {
     width: 59.722vw;
   }
@@ -434,7 +491,14 @@ img {
     min-height: 100svh;
     padding-bottom: 100px;
   }
-
+  .cosmos > div {
+    height: 177.7083vw;
+    min-height: 1000px;
+  }
+  .cosmos img {
+    width: 1777px;
+    height: 1000px;
+  }
   .eyebrow {
     font-size: clamp(12px, 3vw, 21px);
     line-height: 2;
@@ -605,6 +669,17 @@ img {
   }
 }
 
+/* Taust ulatub laia ekraani servadeni, sisu jääb 1440 px laiuseks. */
+@media (min-width: 1440px) {
+  .cosmos > div {
+    height: 177.708333vw;
+  }
+  .cosmos img {
+    width: 177.708333vw;
+    height: 100vw;
+  }
+}
+
 /* Planeet ja tema infoaken liiguvad ühise elemendina. */
 .planet {
   animation: planet-float var(--float-duration, 20s) ease-in-out var(--float-delay, 0s)
@@ -755,10 +830,7 @@ img {
   width: auto;
   height: auto;
   margin: 0;
-  background-image: linear-gradient(to right, #00fffb 0%, #8968ff 50%, #ff5100 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--orange);
   font:
     700 clamp(20px, 2.8vw, 40px) / 1.2 Jura,
     sans-serif;
@@ -841,4 +913,8 @@ img {
     margin-inline: 6%;
     padding: 32px 0 60px;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
