@@ -183,7 +183,7 @@ if (typeof document !== "undefined") {
   equipment.forEach(([id, emoji, title, description]) => {
     const label = document.createElement("label");
     label.className = "item";
-    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.png" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
+    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.webp" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
     items.append(label);
   });
   const inputs = [...items.querySelectorAll("input")];
