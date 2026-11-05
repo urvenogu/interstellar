@@ -10,75 +10,10 @@ const equipment = [
   ["water", "💧", "Veefilter", "Joogivesi igast loigust"],
 ];
 
-// Mänguline kosmoseseiklus: varustuse mõju sõltub sihtkohast.
-const destinations = {
-  Saturn: {
-    scene: "Saabud Saturni rõngaste juurde hõljuvasse puhkelaagrisse.",
-    essential: ["tent", "solar", "food"],
-    effects: {
-      tent: "Telk saab rõngastevahelises laagris sinu hubaseks pesaks.",
-      lighter: "Tulemasin aitab laagriköögis einet soojendada.",
-      wifi: "Ruuter ühendab laagri seadmed, kuid Maale internetti ei ulatu.",
-      solar: "Päikesepaneel laeb aeglaselt laagri akusid.",
-      compass: "Kompassi asemel tuleb rõngaste vahel usaldada laagri kaarti.",
-      bananas: "Banaanidest saab sinu esimene kosmiline rannasnäkk.",
-      food: "Konservid hoiavad kõhu täis ka pika rõngaretke ajal.",
-      cocoa: "Kakao muudab vaate rõngastele eriti mõnusaks.",
-      water: "Veefilter aitab laagri sulatatud jäävett puhastada.",
-    },
-  },
-  Neptuun: {
-    scene: "Sinu mänguline uurimisjaam hõljub Neptuuni jäiste tormide kohal.",
-    essential: ["tent", "food", "cocoa"],
-    effects: {
-      tent: "Telk loob jaama sees sooja ja tuulevaikse puhkekoha.",
-      lighter: "Tulemasinast on abi vaid jaama kaitstud köögis.",
-      wifi: "Ruuter jagab jaama kohalikku võrku, mitte ühendust Maaga.",
-      solar: "Kauge Päike annab paneelile vähe energiat: säästad akut.",
-      compass: "Tormides aitab jaama navigatsioon rohkem kui kompass.",
-      bananas: "Banaanid annavad kiire energia, enne kui need külmuvad.",
-      food: "Konservidest jätkub jõudu tormide uurimiseks.",
-      cocoa: "Kuum kakao on jäise uurimisretke parim soojendaja.",
-      water: "Veefilter vajab jaama veepaaki; pilvedest joogivett ei saa.",
-    },
-  },
-  Marss: {
-    scene: "Maandud Marsi punaste luidete kõrval asuvasse mängulaagrisse.",
-    essential: ["solar", "food", "water"],
-    effects: {
-      tent: "Telk kaitseb laagri sees varustust punase tolmu eest.",
-      lighter: "Tulemasin töötab vaid laagri hapnikuga köögis.",
-      wifi: "Ruuter loob laagri kohaliku võrgu, kuid interneti pead ise kaasa mõtlema.",
-      solar: "Päikesepaneel annab päeval energiat, kui pühid sellelt tolmu.",
-      compass: "Tavaline kompass ei asenda Marsil kaarti ja navigatsiooni.",
-      bananas: "Banaanidest saab magus vahepala luidete vahel.",
-      food: "Konservid annavad pika avastusretke jaoks kindla toiduvaru.",
-      cocoa: "Kakao teeb jaheda Marsi õhtu hubaseks.",
-      water: "Veefilter puhastab laagri sulatatud jäävett.",
-    },
-  },
-  Uraan: {
-    scene: "Sätid end sisse Uraani külma atmosfääri kohal hõljuvas mängujaamas.",
-    essential: ["tent", "food", "cocoa"],
-    effects: {
-      tent: "Telk muudab jaama magamisnurga soojemaks.",
-      lighter: "Tulemasin aitab ainult jaama kaitstud köögis.",
-      wifi: "Ruuter ühendab jaama seadmed; Maa jääb võrgu levialast välja.",
-      solar: "Päikesepaneel annab kaugel Päikesest napilt voolu.",
-      compass:
-        "Viltuse magnetvälja juures ei saa kompassile retke planeerimist usaldada.",
-      bananas: "Banaanid rõõmustavad meeskonda ja annavad energiat.",
-      food: "Konservid tagavad pika jaamapäeva söögipausid.",
-      cocoa: "Kuum kakao aitab külma vaate juures tuju soojas hoida.",
-      water: "Veefilter tuleb kasuks jaama veeringluses.",
-    },
-  },
-};
+const destinations = ["Saturn", "Neptuun", "Marss", "Uraan"];
 
-// MARSI JA NEPTUUNI LOOD — kirjuta oma tekstid siia.
-// Lisa lõigud jutumärkide vahele; iga massiivi rida on üks lõik.
-// Kui lõigud on tühjad, kasutatakse planeedi senist tulemust.
-// Banaanide erireegel jääb alati esikohale.Puhkus läks korda ja jõudsid tervelt koju. Su kohver on alles, kõrvus enam ei vilista ning kodune radiaator pole kunagi nii meeldiv tundunud.
+// Marsi ja Neptuuni põhilood. Eriesemete lood asuvad createOutcome funktsioonis.
+// Banaanide erireegel jääb alati esikohale.
 const customPlanetStories = {
   Marss: {
     title: "Marss",
@@ -103,9 +38,8 @@ const customPlanetStories = {
 };
 
 function createOutcome(destination, selected) {
-  const trip = destinations[destination];
   if (
-    !trip ||
+    !destinations.includes(destination) ||
     selected.length !== 5 ||
     new Set(selected).size !== 5 ||
     selected.some((id) => !equipment.some((item) => item[0] === id))
@@ -198,18 +132,7 @@ function createOutcome(destination, selected) {
       verdict: customStory.verdict,
     };
   }
-  const missing = trip.essential.filter((id) => !selected.includes(id));
-  const names = (ids) =>
-    ids.map((id) => equipment.find((item) => item[0] === id)[2]).join(", ");
-  return {
-    title: `Sinu reis: ${destination}`,
-    summary: trip.scene,
-    effects: selected.map((id) => ({ name: names([id]), text: trip.effects[id] })),
-    verdict:
-      missing.length === 0
-        ? "Hästi pakitud! Kõik selle seikluse põhiesemed on kaasas. Sinu laager on avastusretkeks valmis."
-        : `Seiklus algab väikese väljakutsega! Selle sihtkoha jaoks jäid maha: ${names(missing)}. Laenad puuduva varustuse jaamast ning kohandad oma retkeplaane.`,
-  };
+  throw new Error(`Planeedi ${destination} põhilugu on veel lisamata.`);
 }
 
 if (typeof module !== "undefined")
