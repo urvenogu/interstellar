@@ -23,7 +23,8 @@ const customPlanetStories = {
       "Enne tagasilendu tahad suveniiriks ühe väikese kivi kaasa võtta. Reisijuht vaatab su kohvrit ja küsib, miks see enam kinni ei lähe. Selgub, et sama mõte tuli sul juba hommikul. Seitseteist korda. Jätad kuusteist kivi Marsile ja lubad viimasele, et näitad talle Maal merd.",
       "Maale jõudes on sul kaasas sadu pilte, üks täiesti tavalise välimusega kivi ja uus austus õhu vastu, mida saab tasuta hingata. Lennujaamas küsitakse, kas sul on midagi deklareerida. Vastad: „Natuke tolmu.” Kohvrit avades selgub, et seda on umbes pool Marsi.", // MARSS: järgmine lõik. Vajadusel lisa ridu juurde.
     ],
-    verdict: "Puhkus läks korda ja jõudsid tervelt koju. Nüüd tuleb ainult välja mõelda, kuidas punane tolm pesumasinast kätte saada.", // MARSS: lõpptulemus, näiteks reisi lõpetav lause.
+    verdict:
+      "Puhkus läks korda ja jõudsid tervelt koju. Nüüd tuleb ainult välja mõelda, kuidas punane tolm pesumasinast kätte saada.", // MARSS: lõpptulemus, näiteks reisi lõpetav lause.
   },
   Neptuun: {
     title: "Neptuun",
@@ -33,7 +34,8 @@ const customPlanetStories = {
       "Järgmised päevad mööduvad tormivaatlustel. Hotelli ümber kihutavad pilved nii kiiresti, et sinu tehtud fotodel näevad need välja nagu sinised triibud. Ühe pildi peal on ka su enda peegeldus, sest unustasid välgu sisse. Suveniiripoest ostad postkaardi kirjaga „Neptuun — tule läbi, kui sinnakanti satud”. Kirjutad koju, et ilm on tuuline, aga hommikusöök väga korralik.",
       "Tagasilennu eel küsitakse sinult tagasisidet. Annad hotellile viis tärni, vaadetele viis ja rannale ühe. Teenindaja selgitab, et randa polnud paketis. Maale jõudes seisad lennujaama ees, tunned näol kerget tuuleiili ja hakkad naerma. Keegi küsib, kas reis läks hästi. Vastad: „Väga. Aga järgmine kord võiks Päike natuke lähemal olla.",
     ],
-    verdict: "Puhkus läks korda ja jõudsid tervelt koju. Su kohver on alles, kõrvus enam ei vilista ning kodune radiaator pole kunagi nii meeldiv tundunud.",
+    verdict:
+      "Puhkus läks korda ja jõudsid tervelt koju. Su kohver on alles, kõrvus enam ei vilista ning kodune radiaator pole kunagi nii meeldiv tundunud.",
   },
 };
 
@@ -61,31 +63,33 @@ function createOutcome(destination, selected) {
     };
   }
   if (destination === "Marss" && selected.includes("cocoa")) {
-  return {
-    title: "Marss — kuuma kakao seiklus",
-    summary: [
-      "Poolel teel Marsile otsustad, et nüüd on õige hetk kuuma kakao jaoks. Punane planeet paistab juba aknast ja juhtpaneelil vilguvad tuled, mille tähendust sa täpselt ei tea. Kõik tundub siiski kontrolli all olevat. Paned kakaotopsi paneeli servale, otse sildi „VEDELIKKE MITTE ASETADA” peale.",
-      "Kui sirutad käe telefoni järele, et saabumisest pilti teha, läheb küünarnukk vastu topsi. Kakao voolab üle nuppude ja kaob väikese praksatuse saatel juhtpaneeli sisse. Ekraanile ilmub korraks kiri „Head reisi!”, siis kustuvad kõik tuled. Üks nupp jääb veel vilkuma, aga selgub, et see on kohvimasina oma.",
-      "Vajutad nuppe. Koputad ekraanile. Proovid laeva välja ja uuesti sisse lülitada, kuid ei leia enam kumbagi võimalust. Samal ajal libiseb Marss aeglaselt aknast mööda. Lehvitad talle igaks juhuks, sest maandumist sellest enam ei tule.",
-      "Raadiost kostab viimane ragin ja siis vaikus. Maa ei vasta. Mootorid ei käivitu. Laev hõljub universumi sügavuste poole ning ainus töökorras seade teatab rõõmsalt, et sinu järgmine kuum jook on valmis.",
-    ].join("\n\n"),
-    effects: [],
-    verdict: "Marsi-puhkus jäi ära. Hõljud universumi sügavuste poole, kontakt Maaga puudub ja tagasiteed sa juhtida ei saa. Vähemalt on kakaod veel alles.",
-  };
+    return {
+      title: "Marss — kuuma kakao seiklus",
+      summary: [
+        "Poolel teel Marsile otsustad, et nüüd on õige hetk kuuma kakao jaoks. Punane planeet paistab juba aknast ja juhtpaneelil vilguvad tuled, mille tähendust sa täpselt ei tea. Kõik tundub siiski kontrolli all olevat. Paned kakaotopsi paneeli servale, otse sildi „VEDELIKKE MITTE ASETADA” peale.",
+        "Kui sirutad käe telefoni järele, et saabumisest pilti teha, läheb küünarnukk vastu topsi. Kakao voolab üle nuppude ja kaob väikese praksatuse saatel juhtpaneeli sisse. Ekraanile ilmub korraks kiri „Head reisi!”, siis kustuvad kõik tuled. Üks nupp jääb veel vilkuma, aga selgub, et see on kohvimasina oma.",
+        "Vajutad nuppe. Koputad ekraanile. Proovid laeva välja ja uuesti sisse lülitada, kuid ei leia enam kumbagi võimalust. Samal ajal libiseb Marss aeglaselt aknast mööda. Lehvitad talle igaks juhuks, sest maandumist sellest enam ei tule.",
+        "Raadiost kostab viimane ragin ja siis vaikus. Maa ei vasta. Mootorid ei käivitu. Laev hõljub universumi sügavuste poole ning ainus töökorras seade teatab rõõmsalt, et sinu järgmine kuum jook on valmis.",
+      ].join("\n\n"),
+      effects: [],
+      verdict:
+        "Marsi-puhkus jäi ära. Hõljud universumi sügavuste poole, kontakt Maaga puudub ja tagasiteed sa juhtida ei saa. Vähemalt on kakaod veel alles.",
+    };
   }
-    if (destination === "Neptuun" && selected.includes("food")) {
-  return {
-    title: "Neptuun",
-    summary: [
-      "Neptuuni hotelli jõudes avastad, et oled lõunasöögi maha maganud. Restoran avatakse alles õhtul, aga sul on õnneks konserv kaasas. Otsid selle kohvrist välja ja märkad, et tavapärase oasupi asemel oled kaasa pakkinud surströmmingu. Purgi peal on kala pilt, nii et otsustad anda kohalikule merevaatega puhkusele sobiva alguse.",
-      "Purk on kahtlaselt ümmargune. Asetad selle öökapile ja lähed avajat otsima. Selja taga kostab metalliline naksatus. Siis teine. Jõuad veel mõelda, et toa kütet võiks natuke vähemaks keerata, kui konserv plahvatab.",
-      "Esimesena saab löögi tapeet. Teisena sinu haistmismeel. Kolmandana hotelli ventilatsioon, mis asub enneolematu usinusega haisu kõikidesse tubadesse laiali kandma. Vastuvõtus süttib punane hoiatustuli, mida keegi pole varem näinud. Kasutusjuhendis seisab selle kohta ainult: „Loodame, et seda ei lähe vaja.”",
-      "Külalised tormavad koridori ja leiavad, et seal on veel hullem. Meeskond üritab ventilatsiooni välja lülitada, kuid juhtimisruum asub köögi kõrval, kuhu hais jõudis esimesena. Keegi pakub, et võiks aknad avada. Kõik vaatavad korraks õue, kus möllab Neptuuni torm. Aknad jäävad kinni.",
-      "Hotelli viimane automaatne teade tänab külalisi peatumise eest ja palub lahkudes minibaarist võetud joogid registreerida. Vastust ei tule. Sinu konservist alguse saanud hais osutub tapvaks ning peagi pole hotellis enam elus ühtegi külalist ega meeskonnaliiget.",
-    ].join("\n\n"),
-    effects: [],
-    verdict: "Sina, kõik teised külalised ja kogu meeskond surete. Hotell jääb Neptuuni kohale tühjalt hõljuma. Sinu toa uksele ilmub broneerimissüsteemis märge: „Vajab tuulutamist.”",
-  };
+  if (destination === "Neptuun" && selected.includes("food")) {
+    return {
+      title: "Neptuun",
+      summary: [
+        "Neptuuni hotelli jõudes avastad, et oled lõunasöögi maha maganud. Restoran avatakse alles õhtul, aga sul on õnneks konserv kaasas. Otsid selle kohvrist välja ja märkad, et tavapärase oasupi asemel oled kaasa pakkinud surströmmingu. Purgi peal on kala pilt, nii et otsustad anda kohalikule merevaatega puhkusele sobiva alguse.",
+        "Purk on kahtlaselt ümmargune. Asetad selle öökapile ja lähed avajat otsima. Selja taga kostab metalliline naksatus. Siis teine. Jõuad veel mõelda, et toa kütet võiks natuke vähemaks keerata, kui konserv plahvatab.",
+        "Esimesena saab löögi tapeet. Teisena sinu haistmismeel. Kolmandana hotelli ventilatsioon, mis asub enneolematu usinusega haisu kõikidesse tubadesse laiali kandma. Vastuvõtus süttib punane hoiatustuli, mida keegi pole varem näinud. Kasutusjuhendis seisab selle kohta ainult: „Loodame, et seda ei lähe vaja.”",
+        "Külalised tormavad koridori ja leiavad, et seal on veel hullem. Meeskond üritab ventilatsiooni välja lülitada, kuid juhtimisruum asub köögi kõrval, kuhu hais jõudis esimesena. Keegi pakub, et võiks aknad avada. Kõik vaatavad korraks õue, kus möllab Neptuuni torm. Aknad jäävad kinni.",
+        "Hotelli viimane automaatne teade tänab külalisi peatumise eest ja palub lahkudes minibaarist võetud joogid registreerida. Vastust ei tule. Sinu konservist alguse saanud hais osutub tapvaks ning peagi pole hotellis enam elus ühtegi külalist ega meeskonnaliiget.",
+      ].join("\n\n"),
+      effects: [],
+      verdict:
+        "Sina, kõik teised külalised ja kogu meeskond surete. Hotell jääb Neptuuni kohale tühjalt hõljuma. Sinu toa uksele ilmub broneerimissüsteemis märge: „Vajab tuulutamist.”",
+    };
   }
   if (destination === "Saturn" && selected.includes("lighter")) {
     return {
@@ -138,7 +142,123 @@ function createOutcome(destination, selected) {
 if (typeof module !== "undefined")
   module.exports = { createOutcome, equipment, destinations };
 
+// Vastuseakna välimus lisatakse JavaScriptist: HTML-i ja CSS-i ei pea muutma.
+function setupResultWindow() {
+  const result = document.querySelector("#result");
+  const title = document.querySelector("#result-title");
+  if (!result || !title) return;
+  if (!document.querySelector("#result-window-styles")) {
+    const styles = document.createElement("style");
+    styles.id = "result-window-styles";
+    styles.textContent = `
+/* Reisi vastuseaken — keskjoondatud, soe ja läbikumav. */
+.result {
+  width: calc(100% - 48px);
+  max-width: 1120px;
+  margin: 72px auto 100px;
+  padding: clamp(32px, 4.5vw, 64px) clamp(22px, 4vw, 56px);
+  border: 2px solid var(--orange);
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff7b002e, #b46a6a3b 55%, #ff7b0029);
+  box-shadow: inset 0 0 80px #ff7b000a;
+  text-align: center;
+  color: #fff;
+}
+.result .result-icon {
+  margin-bottom: 26px;
+  font-size: clamp(62px, 7vw, 100px);
+  line-height: 1.2;
+  filter: drop-shadow(0 0 12px #ffb70044);
+}
+.result h2 {
+  margin: 0 0 24px;
+  color: #fff;
+  font:
+    800 clamp(24px, 3.2vw, 46px) / 1.25 "Lexend Exa",
+    sans-serif;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.result .result-subtitle {
+  margin: 0 0 44px;
+  color: var(--mint);
+  font:
+    700 clamp(18px, 2vw, 25px) / 1.5 Jura,
+    sans-serif;
+  text-shadow: 0 0 10px #00ffb766;
+}
+.result #result-summary,
+.result #result-verdict {
+  max-width: 960px;
+  margin-inline: auto;
+  color: #fff;
+  font:
+    600 clamp(17px, 1.9vw, 26px) / 1.55 Jura,
+    sans-serif;
+  letter-spacing: 0.025em;
+  overflow-wrap: break-word;
+}
+.result #result-summary {
+  white-space: pre-line;
+}
+.result #result-verdict {
+  margin-top: 32px;
+}
+.result .result-image {
+  width: min(100%, 440px);
+  margin: 0 auto 32px;
+}
+.result #restart {
+  width: auto;
+  max-width: 100%;
+  min-height: 60px;
+  margin-top: 44px;
+  padding: 16px 32px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--orange);
+  color: #090f24;
+  font:
+    800 clamp(16px, 1.7vw, 22px) / 1.4 "Lexend Exa",
+    sans-serif;
+  letter-spacing: 0.04em;
+}
+.result #restart:hover {
+  background: #ff982f;
+}
+@media (max-width: 700px) {
+  .result {
+    width: 92%;
+    margin: 40px auto 64px;
+    border-radius: 24px;
+  }
+  .result .result-subtitle {
+    margin-bottom: 28px;
+  }
+}
+`;
+    document.head.append(styles);
+  }
+  if (!document.querySelector("#result-icon")) {
+    const icon = document.createElement("div");
+    icon.id = "result-icon";
+    icon.className = "result-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "🏆";
+    result.insertBefore(icon, title);
+  }
+  if (!document.querySelector("#result-subtitle")) {
+    const subtitle = document.createElement("p");
+    subtitle.id = "result-subtitle";
+    subtitle.className = "result-subtitle";
+    title.after(subtitle);
+  }
+  const restart = document.querySelector("#restart");
+  if (restart) restart.textContent = "Proovi uuesti";
+}
+
 if (typeof document !== "undefined") {
+  setupResultWindow();
   let destination = null;
   const items = document.querySelector("#items");
   const result = document.querySelector("#result");
@@ -193,7 +313,7 @@ if (typeof document !== "undefined") {
   equipment.forEach(([id, emoji, title, description]) => {
     const label = document.createElement("label");
     label.className = "item";
-    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.png" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
+    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.webp" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
     items.append(label);
   });
   const inputs = [...items.querySelectorAll("input")];
@@ -252,7 +372,33 @@ if (typeof document !== "undefined") {
   resultButton.addEventListener("click", () => {
     if (resultButton.disabled) return;
     const outcome = createOutcome(destination, selectedItems());
-    document.querySelector("#result-title").textContent = outcome.title;
+    const monkeyEnding = selectedItems().includes("bananas");
+    const failed =
+      monkeyEnding ||
+      (destination === "Saturn" && selectedItems().includes("lighter")) ||
+      (destination === "Marss" && selectedItems().includes("cocoa")) ||
+      (destination === "Neptuun" && selectedItems().includes("food")) ||
+      (destination === "Uraan" && selectedItems().includes("solar"));
+    document.querySelector("#result-icon").textContent = monkeyEnding
+      ? "🐒"
+      : failed
+        ? "💥"
+        : "🏆";
+    document.querySelector("#result-icon").hidden = monkeyEnding;
+    document.querySelector("#restart").hidden = monkeyEnding;
+    document.querySelector("#restart").textContent = failed
+      ? "Proovi uuesti"
+      : "Mine järgmisele reisile";
+    document.querySelector("#result-title").textContent = monkeyEnding
+      ? "„SATUD AHVIDE PLANEEDILE“"
+      : failed
+        ? "„SEIKLUS LÄKS VILTU“"
+        : "„ELASID MUGAVALT“";
+    document.querySelector("#result-subtitle").textContent = monkeyEnding
+      ? "Banaaniradar leidis su üles. Reisiplaan muutus!"
+      : failed
+        ? `${outcome.title} — sellel reisil võttis seiklus ootamatu pöörde.`
+        : "Täiuslik pakkimine. Võiks siia kolida!";
     document.querySelector("#result-summary").textContent = outcome.summary;
     const verdict = document.querySelector("#result-verdict");
     verdict.replaceChildren();
