@@ -257,6 +257,115 @@ function setupResultWindow() {
   if (restart) restart.textContent = "Proovi uuesti";
 }
 
+// Ahvide planeet ilmub enne lugu eraldi tumedal ülekattel.
+function showMonkeyIntro(outcome) {
+  return new Promise((resolve) => {
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.documentElement.style.overflow;
+    const dialog = document.createElement("dialog");
+    dialog.className = "monkey-intro";
+    dialog.setAttribute("aria-label", "Ahvide planeedi reisi tulemus");
+    const close = document.createElement("button");
+    close.className = "monkey-intro-close";
+    close.type = "button";
+    close.textContent = "×";
+    close.setAttribute("aria-label", "Sulge Ahvide planeedi vaade");
+    const content = document.createElement("div");
+    content.className = "monkey-intro-content";
+    const image = document.createElement("img");
+    image.className = "monkey-intro-image";
+    image.src = outcome.image;
+    image.alt = "Ahvide planeet lillade rõngaste ja tulnukahvidega";
+    const story = document.createElement("div");
+    story.className = "monkey-intro-story";
+    story.hidden = true;
+    const title = document.createElement("h2");
+    title.textContent = outcome.title;
+    const paragraphs = document.createElement("div");
+    outcome.summary.split("\n\n").forEach((text) => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      paragraphs.append(paragraph);
+    });
+    const verdict = document.createElement("p");
+    verdict.className = "monkey-intro-verdict";
+    verdict.textContent = "Reisi tulemus: " + outcome.verdict;
+    story.append(title, paragraphs, verdict);
+    content.append(image, story);
+    dialog.append(close, content);
+    if (!document.querySelector("#monkey-intro-styles")) {
+      const styles = document.createElement("style");
+      styles.id = "monkey-intro-styles";
+      styles.textContent = `
+        dialog.monkey-intro { position:fixed; inset:0; width:100%; max-width:none;
+          height:100%; height:100dvh; max-height:none; margin:0; padding:24px;
+          box-sizing:border-box; border:0; color:#fff; background:transparent;
+          overflow-y:auto; overscroll-behavior:contain; }
+        .monkey-intro::backdrop { background:rgba(0,0,0,.72); backdrop-filter:blur(2px); }
+        .monkey-intro-content { min-height:calc(100% - 48px); display:flex;
+          flex-direction:column; align-items:center; justify-content:center;
+          max-width:900px; margin:auto; padding:32px 0; }
+        .monkey-intro-image { display:block; width:min(82vw,650px); max-height:70svh;
+          object-fit:contain; height:auto; flex-shrink:0; animation:monkey-drift 7s ease-in-out infinite;
+          transition:width 800ms ease; filter:drop-shadow(0 0 28px #a600ff44); }
+        .monkey-intro.has-story .monkey-intro-image { width:min(65vw,420px); }
+        .monkey-intro-close { position:fixed; z-index:2; right:20px; top:16px;
+          width:48px; height:48px; border:1px solid #ffffff66; border-radius:50%;
+          color:#fff; background:#161020; font:32px/1 sans-serif; cursor:pointer; }
+        .monkey-intro-close:focus-visible { outline:3px solid #00ffb7; outline-offset:4px; }
+        .monkey-intro-story { background:rgba(0,0,0,.38); border-radius:24px; padding:clamp(22px,4vw,44px);
+          margin-top:36px; width:100%; box-sizing:border-box; text-align:center;
+          animation:monkey-story-in 900ms ease both; }
+        .monkey-intro-story[hidden] { display:none; }
+        .monkey-intro-story h2 { margin:0 0 28px; color:#00ffb7;
+          font:700 clamp(25px,4vw,42px)/1.3 Jura,sans-serif; }
+        .monkey-intro-story p { margin:0 0 24px;
+          font:600 clamp(17px,2vw,23px)/1.65 Jura,sans-serif; }
+        .monkey-intro-story .monkey-intro-verdict { margin-bottom:0; color:#ffb879; font-weight:700; }
+        @keyframes monkey-drift { 0%,100% {transform:translateY(0) rotate(-2deg)}
+          50% {transform:translateY(-14px) rotate(2deg)} }
+        @keyframes monkey-story-in { from {opacity:0;transform:translateY(18px)}
+          to {opacity:1;transform:translateY(0)} }
+        @media(prefers-reduced-motion:reduce) {
+          .monkey-intro-image,.monkey-intro-story { animation:none; transition:none; }
+        }
+      `;
+      document.head.append(styles);
+    }
+    document.body.append(dialog);
+    let timer;
+    let revealStarted = false;
+    let closed = false;
+    function scheduleStory() {
+      if (revealStarted || closed) return;
+      revealStarted = true;
+      timer = window.setTimeout(() => {
+        story.hidden = false;
+        dialog.classList.add("has-story");
+      }, 1500);
+    }
+    image.addEventListener("load", scheduleStory, { once: true });
+    image.addEventListener("error", scheduleStory, { once: true });
+    dialog.addEventListener(
+      "close",
+      () => {
+        closed = true;
+        window.clearTimeout(timer);
+        dialog.remove();
+        document.documentElement.style.overflow = previousOverflow;
+        if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+        resolve();
+      },
+      { once: true },
+    );
+    close.addEventListener("click", () => dialog.close());
+    dialog.showModal();
+    document.documentElement.style.overflow = "hidden";
+    close.focus({ preventScroll: true });
+    if (image.complete) scheduleStory();
+  });
+}
+
 if (typeof document !== "undefined") {
   setupResultWindow();
   let destination = null;
@@ -369,8 +478,9 @@ if (typeof document !== "undefined") {
       moveTo("#packing-title", true);
     }),
   );
-  resultButton.addEventListener("click", () => {
-    if (resultButton.disabled) return;
+  let monkeyIntroOpen = false;
+  resultButton.addEventListener("click", async () => {
+    if (resultButton.disabled || monkeyIntroOpen) return;
     const outcome = createOutcome(destination, selectedItems());
     const monkeyEnding = selectedItems().includes("bananas");
     const failed =
@@ -423,6 +533,16 @@ if (typeof document !== "undefined") {
       li.append(name, effect.text);
       effects.append(li);
     });
+    if (monkeyEnding) {
+      cancelScroll();
+      monkeyIntroOpen = true;
+      try {
+        await showMonkeyIntro(outcome);
+      } finally {
+        monkeyIntroOpen = false;
+      }
+      return;
+    }
     result.hidden = false;
     moveTo("#result-title");
   });
