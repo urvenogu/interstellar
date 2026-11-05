@@ -12,8 +12,6 @@ const equipment = [
 
 const destinations = ["Saturn", "Neptuun", "Marss", "Uraan"];
 
-// Marsi ja Neptuuni põhilood. Eriesemete lood asuvad createOutcome funktsioonis.
-// Banaanide erireegel jääb alati esikohale.
 const customPlanetStories = {
   Marss: {
     title: "Marss",
@@ -193,7 +191,7 @@ if (typeof document !== "undefined") {
   equipment.forEach(([id, emoji, title, description]) => {
     const label = document.createElement("label");
     label.className = "item";
-    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.png" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
+    label.innerHTML = `<input type="checkbox" name="equipment" value="${id}"><span class="check" aria-hidden="true"><img src="assets/checkmark.webp" alt=""></span><span class="emoji" aria-hidden="true">${emoji}</span><span class="item-text"><strong>${title}</strong><small>${description}</small></span>`;
     items.append(label);
   });
   const inputs = [...items.querySelectorAll("input")];
@@ -300,3 +298,24 @@ if (typeof document !== "undefined") {
   });
   updatePacking();
 }
+const planetRequiredHint = document.querySelector("#selected-destination");
+let planetWarningTimeout;
+
+items.addEventListener("pointerdown", (event) => {
+  if (!event.target.closest(".item")) return;
+
+  const planetIsSelected = document.querySelector(
+    '.planet[aria-pressed="true"]'
+  );
+
+  if (planetIsSelected) return;
+
+  clearTimeout(planetWarningTimeout);
+  planetRequiredHint.classList.remove("is-warning");
+  void planetRequiredHint.offsetWidth;
+  planetRequiredHint.classList.add("is-warning");
+
+  planetWarningTimeout = setTimeout(() => {
+    planetRequiredHint.classList.remove("is-warning");
+  }, 900);
+});
