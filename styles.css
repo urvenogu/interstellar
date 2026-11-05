@@ -185,7 +185,7 @@ h1 {
 .packing h2 {
   font-size: 50px;
   line-height: 59px;
-  color: var(--orange);
+  color: #00ffb7;
   text-shadow:
     0 0 7px var(--orange),
     0 0 28px #ff7b0080;
@@ -519,8 +519,8 @@ h1 {
 }
 #selected-destination {
   margin: -25px 0 24px;
-  color: #00ffb7;
-  font-size: 20px;
+  color: #FF7B00;
+  font-size: 24px;
 }
 #packing-status {
   margin-top: 24px;
