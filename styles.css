@@ -1,0 +1,845 @@
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@600;700&family=Lexend+Deca:wght@300&family=Lexend+Exa:wght@800&family=Lexend+Zetta:wght@200&display=swap");
+:root {
+  color-scheme: dark;
+  --orange: #ff7b00;
+  --mint: #00ffb7;
+  background: #252637;
+  font-family: Jura, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  position: relative;
+  isolation: isolate;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  color: inherit;
+}
+h1,
+h2,
+p {
+  margin: 0;
+}
+.page {
+  position: relative;
+  isolation: isolate;
+  max-width: 1440px;
+  min-height: 5118px;
+  margin: auto;
+  overflow: hidden;
+  padding-top: 162px;
+}
+.cosmos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cosmos > div {
+  height: 2559px;
+  position: relative;
+  overflow: hidden;
+}
+.cosmos img {
+  position: absolute;
+  width: 2559px;
+  height: 1440px;
+  max-width: none;
+  left: 50%;
+  top: 50%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.cosmos > div + div img {
+  transform: translate(-50%, -50%) rotate(90deg) scaleY(-1);
+}
+header {
+  text-align: center;
+  margin: auto;
+  width: 860px;
+  max-width: 96%;
+}
+.eyebrow {
+  font:
+    200 40px/50px "Lexend Zetta",
+    sans-serif;
+  color: var(--mint);
+  text-shadow: 0 0 10px var(--mint);
+}
+h1 {
+  font:
+    800 90px/113px "Lexend Exa",
+    sans-serif;
+  white-space: nowrap;
+  text-shadow:
+    0 0 10px white,
+    0 0 65px #ffffffb0;
+}
+.subtitle {
+  font:
+    300 30px/38px "Lexend Deca",
+    sans-serif;
+  color: #ffffff80;
+}
+.destinations {
+  position: relative;
+  height: 1491px;
+  padding-top: 244.5px;
+}
+.destinations h2 {
+  position: relative;
+  z-index: 5;
+  width: 589.571px;
+  height: 150px;
+  margin: auto;
+}
+.destinations h2 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.planets {
+  position: absolute;
+  top: 354px;
+  left: 0;
+  width: 100%;
+  height: 1137px;
+}
+.planet {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  aspect-ratio: 1;
+}
+.planet img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+.planet span {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  border: 1px solid var(--mint);
+  padding: 6px 18px;
+  border-radius: 30px;
+  background: #071223;
+  opacity: 0;
+}
+.planet:hover span,
+.planet:focus-visible span,
+.planet[aria-pressed="true"] span {
+  opacity: 1;
+}
+.planet:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: -60px;
+  border-radius: 50%;
+}
+.jupiter {
+  left: 40.9722%;
+  top: 193px;
+  width: 55.606%;
+}
+.neptune {
+  left: 12.4306%;
+  top: 0;
+  width: 47.014%;
+}
+.mars {
+  left: 44.7222%;
+  top: 10px;
+  width: 31.095%;
+}
+.uranus {
+  left: 13.1944%;
+  top: 473px;
+  width: 45.95%;
+}
+.packing {
+  margin: 0 8.6111% 0 11.5972%;
+  position: relative;
+}
+.packing-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 55px;
+  height: 59px;
+}
+.packing h2 {
+  font-size: 50px;
+  line-height: 59px;
+  color: var(--orange);
+  text-shadow:
+    0 0 7px var(--orange),
+    0 0 28px #ff7b0080;
+  white-space: nowrap;
+}
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.capacity output {
+  font-size: 25px;
+  white-space: nowrap;
+}
+.slots {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 14px;
+}
+.slots i {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--orange);
+  border: 1px solid var(--orange);
+}
+.slots i.empty {
+  background: #ff7b001a;
+}
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 48px;
+}
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 102px;
+  padding: 20px 23px;
+  border: 2px solid #ffffff33;
+  border-radius: 20px;
+  background: #222b4833;
+  cursor: pointer;
+}
+.item input {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 23px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: #ffffff4d;
+  border-radius: 10px;
+}
+.check img {
+  width: 26.784px;
+  height: 24.249px;
+  visibility: hidden;
+}
+.emoji {
+  font-size: 35px;
+  line-height: 1;
+  flex: none;
+}
+.item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.item strong {
+  font-size: 25px;
+  line-height: 30px;
+  white-space: nowrap;
+}
+.item small {
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff80;
+  white-space: nowrap;
+}
+.item:has(input:checked) {
+  border-color: var(--orange);
+  background: #ff7b0026;
+}
+.item input:checked + .check {
+  background: var(--orange);
+}
+.item input:checked + .check img {
+  visibility: visible;
+}
+.item:has(input:focus-visible) {
+  outline: 2px solid var(--mint);
+  outline-offset: 5px;
+}
+.item:has(input:disabled) {
+  cursor: default;
+}
+.item:has(input:disabled) .emoji,
+.item:has(input:disabled) .item-text {
+  opacity: 0.3;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 1439px) and (min-width: 701px) {
+  .page {
+    padding-top: 11.25vw;
+    min-height: 355.4167vw;
+  }
+  .cosmos > div {
+    height: 177.7083vw;
+  }
+  .cosmos img {
+    width: 177.7083vw;
+    height: 100vw;
+  }
+  header {
+    width: 59.722vw;
+  }
+  .eyebrow {
+    font-size: 2.7778vw;
+    line-height: 3.4722vw;
+  }
+  h1 {
+    font-size: 6.25vw;
+    line-height: 7.8472vw;
+  }
+  .subtitle {
+    font-size: 2.0833vw;
+    line-height: 2.6389vw;
+  }
+  .destinations {
+    height: 103.5417vw;
+    padding-top: 16.9792vw;
+  }
+  .destinations h2 {
+    width: 40.9424vw;
+    height: 10.4167vw;
+  }
+  .planets {
+    top: 24.5833vw;
+    height: 78.9583vw;
+  }
+  .jupiter {
+    top: 13.4028vw;
+  }
+  .mars {
+    top: 0.6944vw;
+  }
+  .uranus {
+    top: 32.8472vw;
+  }
+  .packing-heading {
+    height: 4.0972vw;
+    margin-bottom: 3.8194vw;
+  }
+  .packing h2 {
+    font-size: 3.4722vw;
+    line-height: 4.0972vw;
+  }
+  .capacity {
+    gap: 0.8333vw;
+  }
+  .capacity output {
+    font-size: 1.7361vw;
+  }
+  .slots {
+    gap: 0.9722vw;
+  }
+  .slots i {
+    width: 2.7778vw;
+    height: 2.7778vw;
+    border-radius: 0.6944vw;
+  }
+  .items {
+    gap: 1.5278vw 3.3333vw;
+  }
+  .item {
+    height: 7.0833vw;
+    padding: 1.3889vw 1.5972vw;
+    gap: 0.9028vw;
+    border-radius: 1.3889vw;
+  }
+  .check {
+    width: 2.7778vw;
+    height: 2.7778vw;
+    border-radius: 0.6944vw;
+  }
+  .check img {
+    width: 1.86vw;
+    height: 1.684vw;
+  }
+  .item input {
+    width: 2.7778vw;
+    height: 2.7778vw;
+    left: 1.5972vw;
+  }
+  .emoji {
+    font-size: 2.4306vw;
+  }
+  .item strong {
+    font-size: 1.7361vw;
+    line-height: 2.0833vw;
+  }
+  .item small {
+    font-size: 1.0417vw;
+    line-height: 1.25vw;
+  }
+}
+@media (max-width: 700px) {
+  .page {
+    padding-top: 70px;
+    min-height: 100svh;
+    padding-bottom: 100px;
+  }
+  .cosmos > div {
+    height: 177.7083vw;
+    min-height: 1000px;
+  }
+  .cosmos img {
+    width: 1777px;
+    height: 1000px;
+  }
+  .eyebrow {
+    font-size: clamp(12px, 3vw, 21px);
+    line-height: 2;
+  }
+  h1 {
+    font-size: clamp(22px, 5.7vw, 40px);
+    line-height: 1.5;
+  }
+  .subtitle {
+    font-size: clamp(12px, 2.65vw, 18px);
+    line-height: 1.8;
+  }
+  .destinations {
+    height: 108vw;
+    padding-top: 10vw;
+  }
+  .destinations h2 {
+    width: 65vw;
+    height: 16.537vw;
+  }
+  .planets {
+    top: 22vw;
+    height: 86vw;
+  }
+  .jupiter {
+    top: 13.4vw;
+  }
+  .mars {
+    top: 0.7vw;
+  }
+  .uranus {
+    top: 32.85vw;
+  }
+  .planet span {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+  .packing {
+    margin: 0 6%;
+  }
+  .packing-heading {
+    height: auto;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .packing h2 {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+  .capacity output {
+    font-size: 19px;
+  }
+  .slots {
+    gap: 7px;
+  }
+  .slots i {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
+  .items {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .item {
+    height: 94px;
+  }
+  .item strong {
+    font-size: 23px;
+  }
+  .item small {
+    font-size: 14px;
+  }
+}
+
+/* Valikuvoog ja reisi tulemus */
+.planets.has-selection .planet[aria-pressed="false"] img {
+  filter: grayscale(1);
+  opacity: 0.65;
+}
+.planet img {
+  transition:
+    filter 220ms,
+    opacity 220ms;
+}
+#packing-title,
+#result-title {
+  scroll-margin-top: 32px;
+}
+#selected-destination {
+  margin: -25px 0 24px;
+  color: #00ffb7;
+  font-size: 20px;
+}
+#packing-status {
+  margin-top: 24px;
+  min-height: 24px;
+  color: #ffffffb3;
+  font-size: 18px;
+}
+.action {
+  margin-top: 24px;
+  border: 1px solid var(--orange);
+  border-radius: 14px;
+  padding: 16px 28px;
+  background: var(--orange);
+  color: #171821;
+  font:
+    700 22px Jura,
+    sans-serif;
+  cursor: pointer;
+}
+.action:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.action:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 5px;
+}
+.result {
+  margin: 60px 8.6111% 100px 11.5972%;
+  padding: 36px;
+  border: 1px solid var(--orange);
+  border-radius: 24px;
+  background: #101729eb;
+  font-size: 21px;
+  line-height: 1.6;
+}
+.result[hidden] {
+  display: none;
+}
+.result h2 {
+  color: var(--mint);
+  font-size: 34px;
+}
+.result h3 {
+  margin: 24px 0 12px;
+  font-size: 24px;
+}
+.result li {
+  margin-bottom: 14px;
+}
+#result-verdict {
+  color: #ffbb7b;
+}
+@media (max-width: 700px) {
+  #selected-destination {
+    margin: 0 0 20px;
+    font-size: 17px;
+  }
+  .result {
+    margin: 40px 6%;
+    padding: 24px;
+    font-size: 18px;
+  }
+  .result h2 {
+    font-size: 28px;
+  }
+  .action {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .planet img {
+    transition: none;
+  }
+}
+
+/* Taust ulatub laia ekraani servadeni, sisu jääb 1440 px laiuseks. */
+@media (min-width: 1440px) {
+  .cosmos > div {
+    height: 177.708333vw;
+  }
+  .cosmos img {
+    width: 177.708333vw;
+    height: 100vw;
+  }
+}
+
+/* Planeet ja tema infoaken liiguvad ühise elemendina. */
+.planet {
+  animation: planet-float var(--float-duration, 20s) ease-in-out var(--float-delay, 0s)
+    infinite;
+}
+.planet:hover,
+.planet:focus-visible {
+  z-index: 10;
+}
+.planet .planet-info {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  width: clamp(220px, 21vw, 290px);
+  padding: 16px 18px;
+  border: 1px solid #00ffb766;
+  border-radius: 16px;
+  background: #0b1529f2;
+  box-shadow:
+    0 12px 35px #0006,
+    0 0 24px #00ffb71a;
+  color: #fff;
+  text-align: left;
+  white-space: normal;
+  font-size: 16px;
+  line-height: 1.5;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 180ms,
+    visibility 180ms;
+}
+.planet-info strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--mint);
+  font-size: 17px;
+}
+.planet-info small {
+  display: block;
+  color: #ffffffc4;
+  font-size: 15px;
+}
+.planet:hover .planet-info,
+.planet:focus-visible .planet-info {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.planet.info-dismissed .planet-info {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+@keyframes planet-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(calc(-1 * var(--float-tilt, 2deg)));
+  }
+  33% {
+    transform: translate(var(--float-x, 8px), calc(-1 * var(--float-y, 12px)))
+      rotate(var(--float-tilt, 2deg));
+  }
+  68% {
+    transform: translate(
+        calc(-1 * var(--float-x, 8px)),
+        calc(var(--float-y, 12px) * -0.35)
+      )
+      rotate(0deg);
+  }
+}
+@media (max-width: 700px) {
+  .planet .planet-info {
+    bottom: -20px;
+    width: 210px;
+    padding: 12px;
+  }
+  .planet-info strong {
+    font-size: 15px;
+  }
+  .planet-info small {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .planet {
+    animation: none;
+  }
+  .planet .planet-info {
+    transition: none;
+  }
+}
+
+/* Läbipaistvad pildiservad ei tohi naaberplaneedi hiirt kinni püüda.
+   Eraldi tabamisala jätab pildi ja infoakna lõikamata. */
+.planet {
+  pointer-events: none;
+}
+.planet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: ellipse(28% 28% at 50% 52%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.planet.jupiter::before {
+  clip-path: ellipse(31% 24% at 50% 50%);
+}
+.planet.mars::before {
+  clip-path: ellipse(23% 25% at 50% 49%);
+}
+.planet > span:not(.planet-info) {
+  pointer-events: none;
+}
+
+/* Tihedam planeedikogum päise all; pealkiri asub planeetide vahel. */
+.destinations {
+  --scene-unit: min(1vw, 14.4px);
+  height: calc(var(--scene-unit) * 84);
+  padding-top: 0;
+}
+.planets {
+  top: calc(var(--scene-unit) * 1.7);
+}
+.planet.neptune {
+  left: 4%;
+}
+.planet.mars {
+  left: 48.5%;
+}
+.planet.jupiter {
+  left: 43%;
+  top: calc(var(--scene-unit) * 18.3);
+}
+.planet.uranus {
+  left: 10.5%;
+  top: calc(var(--scene-unit) * 34.25);
+}
+.destinations .adventure-title {
+  position: absolute;
+  top: calc(var(--scene-unit) * 33);
+  left: 49%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  margin: 0;
+  color: var(--orange);
+  font:
+    700 clamp(20px, 2.8vw, 40px) / 1.2 Jura,
+    sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow:
+    0 0 8px #ff7b0099,
+    0 0 24px #ff7b0044;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .destinations {
+    height: 88vw;
+  }
+  .destinations .adventure-title {
+    top: 35vw;
+    font-size: clamp(17px, 3.5vw, 24px);
+  }
+}
+
+#result-summary {
+  white-space: pre-line;
+}
+.result-image {
+  display: block;
+  width: min(100%, 560px);
+  height: auto;
+  margin: 24px auto 32px;
+  object-fit: contain;
+}
+.result-image[hidden] {
+  display: none;
+}
+.page > header {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
+  text-align: center;
+}
+
+.page > header h1 {
+  width: 100%;
+  margin: 0;
+  font-size: clamp(22px, 6.25vw, 150px);
+  line-height: 1.25;
+  text-align: center;
+}
+/* Ettevõtte lugu lõpetab lehe ilma pika tühja sabata. */
+.page:has(.about) {
+  min-height: 0;
+}
+.about {
+  max-width: 960px;
+  margin: clamp(100px, 12vw, 180px) auto 0;
+  padding: 48px 32px 100px;
+  border-top: 1px solid #00ffb744;
+}
+.about h2 {
+  max-width: 800px;
+  margin-bottom: 32px;
+  color: var(--mint);
+  font:
+    700 clamp(26px, 3vw, 40px) / 1.3 Jura,
+    sans-serif;
+  text-shadow: 0 0 20px #00ffb72b;
+}
+.about p {
+  margin-bottom: 24px;
+  color: #ffffffbf;
+  font:
+    300 clamp(16px, 1.4vw, 19px) / 1.85 "Lexend Deca",
+    sans-serif;
+}
+.about p:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 700px) {
+  .about {
+    margin-inline: 6%;
+    padding: 32px 0 60px;
+  }
+}

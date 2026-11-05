@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Interstellar — Reis galaktikas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="cosmos" aria-hidden="true">
+      <div><img src="assets/background.png" alt="" /></div>
+      <div><img src="assets/background.png" alt="" /></div>
+    </div>
+    <main class="page" data-node-id="1:2">
+      <header>
+        <p class="eyebrow">Seiklusbüroo</p>
+        <h1>INTERSTELLAR</h1>
+        <p class="subtitle">Vali planeet, paki seljakott ja seiklus algab!</p>
+      </header>
+      <section class="destinations" aria-label="Vali reisi sihtkoht">
+        <h2 class="adventure-title">Vali seiklus <span aria-hidden="true">🚀</span></h2>
+        <div class="planets" role="group" aria-label="Planeedid">
+          <button
+            class="planet jupiter"
+            aria-label="Saturn"
+            aria-pressed="false"
+            data-node-id="52:2"
+            aria-describedby="planet-info-0"
+          >
+            <img src="assets/jupiter.png" alt="Päikeseprillide ja ujumisrõngaga Saturn" />
+            <span class="planet-info" id="planet-info-0" role="tooltip"
+              ><strong>Saturn · Rõngastevaheline puhkus</strong
+              ><small
+                >Päikeseprillid ette ja seiklus võib alata! Siin ootab sind mõnus hõljuv
+                puhkelaager.</small
+              ></span
+            >
+          </button>
+          <button
+            class="planet neptune"
+            aria-label="Neptuun"
+            aria-pressed="false"
+            data-node-id="52:4"
+            aria-describedby="planet-info-1"
+          >
+            <img src="assets/neptune.png" alt="Talvemütsiga sinine Neptuun" />
+            <span class="planet-info" id="planet-info-1" role="tooltip"
+              ><strong>Neptuun · Jäine avastusretk</strong
+              ><small
+                >Pane müts pähe ja paki kaasa midagi soojendavat. Sinu uurimisjaam ootab
+                tormide kohal.</small
+              ></span
+            >
+          </button>
+          <button
+            class="planet mars"
+            aria-label="Marss"
+            aria-pressed="false"
+            data-node-id="52:6"
+            aria-describedby="planet-info-2"
+          >
+            <img src="assets/mars.png" alt="Punane Marss" />
+            <span class="planet-info" id="planet-info-2" role="tooltip"
+              ><strong>Marss · Seiklus punastel luidetel</strong
+              ><small
+                >Tolmused rajad ja jahedad õhtud kutsuvad avastama. Vali varustus oma
+                Marsi laagri jaoks.</small
+              ></span
+            >
+          </button>
+          <button
+            class="planet uranus"
+            aria-label="Uraan"
+            aria-pressed="false"
+            data-node-id="52:8"
+            aria-describedby="planet-info-3"
+          >
+            <img src="assets/uranus.png" alt="Türkiissinine Uraan" />
+            <span class="planet-info" id="planet-info-3" role="tooltip"
+              ><strong>Uraan · Külm, aga uudishimulik</strong
+              ><small
+                >Hõljuva jaama aknast avaneb türkiissinine maailm. Hubane varustus teeb
+                retke mõnusamaks.</small
+              ></span
+            >
+          </button>
+        </div>
+        <p id="destination-status" class="sr-only" role="status"></p>
+      </section>
+      <section class="packing" id="packing" aria-labelledby="packing-title">
+        <div class="packing-heading">
+          <h2 id="packing-title" tabindex="-1">Paki seljakott 🎒</h2>
+          <div class="capacity">
+            <output id="count" aria-live="polite">0/5</output>
+            <div class="slots" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+        <p id="selected-destination">Alustuseks vali ülevalt planeet.</p>
+        <div class="items" id="items"></div>
+        <p id="packing-status" role="status"></p>
+        <button class="action" id="show-result" disabled>Vaata reisi tulemust 🚀</button>
+      </section>
+      <section class="result" id="result" aria-labelledby="result-title" hidden>
+        <h2 id="result-title" tabindex="-1"></h2>
+        <img
+          id="result-image"
+          class="result-image"
+          alt="Roheline Ahvide planeet, mida ümbritsevad lillad rõngad ja banaanid ning valitsevad tulnukahvid."
+          hidden
+        />
+        <p id="result-summary"></p>
+        <h3 id="result-effects-heading">Sinu varustus ja selle mõju</h3>
+        <ul id="result-effects"></ul>
+        <p id="result-verdict"></p>
+        <button class="action" id="restart">Alusta uut reisi</button>
+      </section>
+      <section class="about" aria-labelledby="about-title">
+        <h2 id="about-title">Interstellar — puhkus väljaspool harjumuspärast</h2>
+        <p>
+          Interstellar sai alguse väga maisest küsimusest: „Kuhu puhkusele minna, kui oled
+          juba igal pool käinud?” Selle küsis meie asutaja pärast seda, kui ta oli
+          kolmandat aastat järjest broneerinud toa merevaatega ja avastanud, et vaade oli
+          tegelikult parkimismajale. Ta võttis kaardi lahti, vaatas korraks Maast
+          kaugemale ja leidis, et Päikesesüsteemis on veel päris mitu kohta, kuhu pole
+          puhkusele jõudnud.
+        </p>
+        <p>
+          Esimene reis viis Marsile. Reisijad tulid tagasi punase tolmuga kaetud kohvrite,
+          sadade fotode ja üksmeelse hinnanguga, et vaated olid pikast lennust väärt.
+          Edasi lisandusid Kuu lühireisid, Saturni rõngatuurid ning väljasõidud Uraani ja
+          Neptuuni juurde. Igal sihtkohal on oma võlu: mõni pakub vaikust, mõni uskumatuid
+          värve ja mõni võimalust saata koju postkaart sõnadega „Siin on tore. Tagasi
+          jõuan mitme kuu pärast.”
+        </p>
+        <p>
+          Täna korraldab Interstellar elamusreise meie Päikesesüsteemi planeetidele ja
+          nende ümbrusse. Meie reisid on mõeldud uudishimulikele inimestele, kes tahavad
+          korraks Maast kaugemale vaadata, ilma et peaksid ise lennuplaani koostama.
+          Valime marsruudi, pakime programmi täis häid vaateid ning hoolitseme selle eest,
+          et tagasisõit oleks sama kindel osa puhkusest kui väljasõit.
+        </p>
+        <p>
+          Meie lemmikhetk saabub alati reisi lõpus. Reisija astub Maal maha, võtab kohvri
+          ja ütleb: „Ma poleks arvanud, et hakkan kunagi igatsema oma tavalist voodit.”
+          Siis näitab ta meile veel üht pilti Saturnist ja küsib, kuhu järgmisena minna.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
