@@ -759,7 +759,15 @@ h1 {
   width: auto;
   height: auto;
   margin: 0;
-  color: var(--orange);
+  background-image: linear-gradient(
+  to right,
+  #00FFFB 0%,
+  #8968FF 50%,
+  #FF5100 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font:
     700 clamp(20px, 2.8vw, 40px) / 1.2 Jura,
     sans-serif;

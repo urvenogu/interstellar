@@ -55,7 +55,7 @@ function createOutcome(destination, selected) {
         "Alguses arvad, et tegu on eksitusega. Siis näed oma tööülesannete nimekirja: banaanide koorimine, banaanikoorte koristamine ja banaanide valvamine, et keegi teine neid ära ei sööks. Nimekirja lõpus seisab: „Töölepingu lõpp: mitte kunagi.”",
       ].join("\n\n"),
       effects: [],
-      image: "assets/ahvideplaneet.png",
+      image: "assets/Ahvideplaneet.webp",
       verdict:
         "Unusta planeet, kuhu minna tahtsid. Jääd igaveseks Ahvide planeedile orjaks — ja sulle ei anta isegi ühtki banaani.",
     };
