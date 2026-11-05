@@ -426,7 +426,31 @@ if (typeof document !== "undefined") {
   const inputs = [...items.querySelectorAll("input")];
   const selectedItems = () =>
     inputs.filter((input) => input.checked).map((input) => input.value);
+  
+  const packingHint = document.querySelector("#selected-destination");
+  let packingWarningTimeout;
+
+  function showPackingWarning() {
+    clearTimeout(packingWarningTimeout);
+    packingHint.classList.remove("is-warning");
+    void packingHint.offsetWidth;
+    packingHint.classList.add("is-warning");
+
+    packingWarningTimeout = setTimeout(() => {
+      packingHint.classList.remove("is-warning");
+    }, 900);
+  }
+
+  items.addEventListener("pointerdown", (event) => {
+    if (!destination && event.target.closest(".item")) {
+      showPackingWarning();
+    }
+  });
+  
   function updatePacking() {
+    clearTimeout(packingWarningTimeout);
+    packingHint.classList.remove("is-warning");
+
     const count = selectedItems().length;
     document.querySelector("#count").textContent = `${count}/5`;
     inputs.forEach((input) => {
@@ -440,7 +464,6 @@ if (typeof document !== "undefined") {
       : count === 5
         ? "Seljakott on valmis! Vaata oma reisi tulemust."
         : `Vali veel ${5 - count} eset.`;
-    resultButton.disabled = !destination || count !== 5;
     result.hidden = true;
   }
   items.addEventListener("change", updatePacking);
@@ -478,7 +501,12 @@ if (typeof document !== "undefined") {
   );
   let monkeyIntroOpen = false;
   resultButton.addEventListener("click", async () => {
-    if (resultButton.disabled || monkeyIntroOpen) return;
+    if (monkeyIntroOpen) return;
+
+    if (!destination || selectedItems().length !== 5) {
+      showPackingWarning();
+      return;
+    }
     const outcome = createOutcome(destination, selectedItems());
     const monkeyEnding = selectedItems().includes("bananas");
     const failed =
@@ -564,24 +592,4 @@ if (typeof document !== "undefined") {
   });
   updatePacking();
 }
-const planetRequiredHint = document.querySelector("#selected-destination");
-let planetWarningTimeout;
 
-items.addEventListener("pointerdown", (event) => {
-  if (!event.target.closest(".item")) return;
-
-  const planetIsSelected = document.querySelector(
-    '.planet[aria-pressed="true"]'
-  );
-
-  if (planetIsSelected) return;
-
-  clearTimeout(planetWarningTimeout);
-  planetRequiredHint.classList.remove("is-warning");
-  void planetRequiredHint.offsetWidth;
-  planetRequiredHint.classList.add("is-warning");
-
-  planetWarningTimeout = setTimeout(() => {
-    planetRequiredHint.classList.remove("is-warning");
-  }, 900);
-});

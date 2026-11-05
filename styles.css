@@ -801,8 +801,6 @@ img {
 .planet > span:not(.planet-info) {
   pointer-events: none;
 }
-
-/* Tihedam planeedikogum päise all; pealkiri asub planeetide vahel. */
 .destinations {
   --scene-unit: min(1vw, 14.4px);
   height: calc(var(--scene-unit) * 84);
@@ -833,15 +831,19 @@ img {
   width: auto;
   height: auto;
   margin: 0;
-  color: var(--orange);
+  background-image: linear-gradient(
+  to right,
+  #00FFFB 0%,
+  #8968FF 50%,
+  #FF5100 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font:
     700 clamp(20px, 2.8vw, 40px) / 1.2 Jura,
     sans-serif;
   text-align: center;
   white-space: nowrap;
-  text-shadow:
-    0 0 8px #ff7b0099,
-    0 0 24px #ff7b0044;
   pointer-events: none;
 }
 @media (max-width: 700px) {
@@ -1051,5 +1053,33 @@ img {
 @media (prefers-reduced-motion: reduce) {
   #selected-destination.is-warning {
     animation: none;
+  }
+}
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: #00FFB7;
+  color: #171821;
+  font: 700 20px Jura, sans-serif;
+  text-decoration: none;
+}
+
+.about-cta:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 5px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-cta span {
+    transition: transform 180ms ease;
+  }
+
+  .about-cta:hover span,
+  .about-cta:focus-visible span {
+    transform: translateY(3px);
   }
 }
