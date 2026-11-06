@@ -37,6 +37,9 @@ const customPlanetStories = {
   },
 };
 
+// Liikumise ja loo ilmumise ajad (millisekundites).
+const timing = { scrollDelay: 250, scrollDuration: 1200, monkeyStoryDelay: 1500 };
+
 function createOutcome(destination, selected) {
   if (
     !destinations.includes(destination) ||
@@ -340,7 +343,7 @@ function showMonkeyIntro(outcome) {
       timer = window.setTimeout(() => {
         story.hidden = false;
         dialog.classList.add("has-story");
-      }, 1500);
+      }, timing.monkeyStoryDelay);
     }
     image.addEventListener("load", scheduleStory, { once: true });
     image.addEventListener("error", scheduleStory, { once: true });
@@ -366,6 +369,7 @@ function showMonkeyIntro(outcome) {
 
 if (typeof document !== "undefined") {
   setupResultWindow();
+  setupPackingButtons();
   let destination = null;
   const items = document.querySelector("#items");
   const result = document.querySelector("#result");
@@ -397,8 +401,11 @@ if (typeof document !== "undefined") {
       window.addEventListener("touchstart", stop, { passive: true });
       window.addEventListener("keydown", stop);
       function animate(time) {
-        if (started === undefined) started = time + 250;
-        const progress = Math.max(0, Math.min(1, (time - started) / 1200));
+        if (started === undefined) started = time + timing.scrollDelay;
+        const progress = Math.max(
+          0,
+          Math.min(1, (time - started) / timing.scrollDuration),
+        );
         const eased =
           progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
         window.scrollTo({ top: start + (end - start) * eased, behavior: "instant" });
@@ -426,7 +433,7 @@ if (typeof document !== "undefined") {
   const inputs = [...items.querySelectorAll("input")];
   const selectedItems = () =>
     inputs.filter((input) => input.checked).map((input) => input.value);
-  
+
   const packingHint = document.querySelector("#selected-destination");
   let packingWarningTimeout;
 
@@ -446,7 +453,7 @@ if (typeof document !== "undefined") {
       showPackingWarning();
     }
   });
-  
+
   function updatePacking() {
     clearTimeout(packingWarningTimeout);
     packingHint.classList.remove("is-warning");
@@ -560,6 +567,7 @@ if (typeof document !== "undefined") {
       effects.append(li);
     });
     if (monkeyEnding) {
+      result.hidden = true;
       cancelScroll();
       monkeyIntroOpen = true;
       try {
@@ -569,19 +577,20 @@ if (typeof document !== "undefined") {
       }
       return;
     }
+    cancelScroll();
     result.hidden = false;
 
-// Fookus pealkirjale, kerimine kogu kasti algusesse.
-document.querySelector("#result-title").focus({
-  preventScroll: true,
-});
+    // Fookus pealkirjale, kerimine kogu kasti algusesse.
+    document.querySelector("#result-title").focus({
+      preventScroll: true,
+    });
 
-result.style.scrollMarginTop = "32px";
+    result.style.scrollMarginTop = "32px";
 
-result.scrollIntoView({
-  behavior: reducedMotion.matches ? "instant" : "smooth",
-  block: "start",
-});
+    result.scrollIntoView({
+      behavior: reducedMotion.matches ? "instant" : "smooth",
+      block: "start",
+    });
   });
   document.querySelector("#restart").addEventListener("click", () => {
     cancelScroll();
@@ -604,55 +613,48 @@ result.scrollIntoView({
   updatePacking();
 }
 
-// „Paki ümber” nupp tulemuse nupu kõrvale
-const packingResultButton = document.querySelector("#show-result");
-const packingItems = document.querySelector("#items");
+function setupPackingButtons() {
+  const packingResultButton = document.querySelector("#show-result");
+  const packingItems = document.querySelector("#items");
 
-if (
-  packingResultButton &&
-  packingItems &&
-  !document.querySelector("#repack-button")
-) {
-  const buttons = document.createElement("div");
+  if (packingResultButton && packingItems && !document.querySelector("#repack-button")) {
+    const buttons = document.createElement("div");
 
-  Object.assign(buttons.style, {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "16px",
-    marginTop: "24px",
-    marginBottom: "80px",
-  });
+    Object.assign(buttons.style, {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: "16px",
+      marginTop: "24px",
+      marginBottom: "80px",
+    });
 
-  packingResultButton.before(buttons);
-  buttons.append(packingResultButton);
-  packingResultButton.style.marginTop = "0";
+    packingResultButton.before(buttons);
+    buttons.append(packingResultButton);
+    packingResultButton.style.marginTop = "0";
 
-  const repackButton = document.createElement("button");
-  repackButton.id = "repack-button";
-  repackButton.type = "button";
-  repackButton.className = "action";
-  repackButton.textContent = "Paki ümber ↻";
+    const repackButton = document.createElement("button");
+    repackButton.id = "repack-button";
+    repackButton.type = "button";
+    repackButton.className = "action";
+    repackButton.textContent = "Paki ümber ↻";
 
-  Object.assign(repackButton.style, {
-    background: "#00ffb7",
-    borderColor: "#00ffb7",
-    color: "#090f24",
-    marginTop: "0",
-  });
+    Object.assign(repackButton.style, {
+      background: "#00ffb7",
+      borderColor: "#00ffb7",
+      color: "#090f24",
+      marginTop: "0",
+    });
 
-  repackButton.addEventListener("click", () => {
-    packingItems.querySelectorAll("input[type='checkbox']").forEach(
-      (input) => {
+    repackButton.addEventListener("click", () => {
+      packingItems.querySelectorAll("input[type='checkbox']").forEach((input) => {
         input.checked = false;
-      }
-    );
+      });
 
-    // Uuendab loendurit, esemete saadavust ja tulemuse nuppu.
-    packingItems.dispatchEvent(
-      new Event("change", { bubbles: true })
-    );
-  });
+      // Uuendab loendurit, esemete saadavust ja tulemuse nuppu.
+      packingItems.dispatchEvent(new Event("change", { bubbles: true }));
+    });
 
-  buttons.append(repackButton);
+    buttons.append(repackButton);
+  }
 }
