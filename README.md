@@ -8,7 +8,7 @@ Tegemist on õppimise eesmärgil loodudu kodulehega.
 Vali planeet, paki 5 asja etteantud esemete hulgast ja alusta reisi. 
 
 Tiim
-Elijah, Valmar, Diana, Siimon, Priidik, Urve.
+Elijah, Valmar, Diana, Siimon, Predik, Urve.
 
 Tiimi missioon
 Oli luua mänguline reisi planeerija, kus kasutaja valib sihtkoha ja varustuse ning saab oma valikutest sõltuva tulemuse või loo.
@@ -34,7 +34,7 @@ Lõi kodulehele reisi osa:
 2) reisile kaasapakitavad asjad
 3) asjadest ja planeedi valikutest sõltuvad tulemused
 
-Priidik:
+Predik:
 1) lõi lehele footeri koos kontaktivõtmise kohaga
 
 Urve:
