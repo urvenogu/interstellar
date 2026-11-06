@@ -593,3 +593,55 @@ if (typeof document !== "undefined") {
   updatePacking();
 }
 
+// „Paki ümber” nupp tulemuse nupu kõrvale
+const packingResultButton = document.querySelector("#show-result");
+const packingItems = document.querySelector("#items");
+
+if (
+  packingResultButton &&
+  packingItems &&
+  !document.querySelector("#repack-button")
+) {
+  const buttons = document.createElement("div");
+
+  Object.assign(buttons.style, {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "16px",
+    marginTop: "24px",
+    marginBottom: "80px",
+  });
+
+  packingResultButton.before(buttons);
+  buttons.append(packingResultButton);
+  packingResultButton.style.marginTop = "0";
+
+  const repackButton = document.createElement("button");
+  repackButton.id = "repack-button";
+  repackButton.type = "button";
+  repackButton.className = "action";
+  repackButton.textContent = "Paki ümber ↻";
+
+  Object.assign(repackButton.style, {
+    background: "#00ffb7",
+    borderColor: "#00ffb7",
+    color: "#090f24",
+    marginTop: "0",
+  });
+
+  repackButton.addEventListener("click", () => {
+    packingItems.querySelectorAll("input[type='checkbox']").forEach(
+      (input) => {
+        input.checked = false;
+      }
+    );
+
+    // Uuendab loendurit, esemete saadavust ja tulemuse nuppu.
+    packingItems.dispatchEvent(
+      new Event("change", { bubbles: true })
+    );
+  });
+
+  buttons.append(repackButton);
+}
