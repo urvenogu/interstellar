@@ -1152,3 +1152,24 @@ html {
   body > header .logo-container { display: flex; width: 100%; gap: 12px; }
   body > header .menu-toggle { display: grid; flex: 0 0 48px; visibility: visible; opacity: 1; position: relative; z-index: 31; }
 }
+/* Päises oleva planeedi hõljumine */
+.image_hero img {
+  animation: hero-float 10s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image_hero img {
+    animation: none;
+  }
+}
