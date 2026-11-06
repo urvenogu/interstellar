@@ -708,7 +708,7 @@ function updateParallax() {
   // Taust liigub maksimaalselt 60 pikslit.
   const movement = reducedMotion.matches
     ? 0
-    : Math.min(window.scrollY * 0.08, 60);
+    : Math.min(window.scrollY * 0.15, 100);
 
   backgroundImage.style.setProperty(
     "--parallax-y",

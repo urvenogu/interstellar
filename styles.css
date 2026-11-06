@@ -1025,9 +1025,9 @@ html {
   left: 50%;
 
   /* Lisaruum takistab liikumisel tühjade servade tekkimist */
-  width: calc(100vh + 160px);
-  width: calc(100dvh + 160px);
-  height: calc(100vw + 160px);
+  width: calc(100vh + 240px);
+  width: calc(100dvh + 240px);
+  height: calc(100vw + 240px);
   max-width: none;
 
   object-fit: cover;
