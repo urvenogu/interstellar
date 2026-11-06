@@ -397,8 +397,8 @@ if (typeof document !== "undefined") {
       window.addEventListener("touchstart", stop, { passive: true });
       window.addEventListener("keydown", stop);
       function animate(time) {
-        if (started === undefined) started = time + 350;
-        const progress = Math.max(0, Math.min(1, (time - started) / 1800));
+        if (started === undefined) started = time + 250;
+        const progress = Math.max(0, Math.min(1, (time - started) / 1200));
         const eased =
           progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
         window.scrollTo({ top: start + (end - start) * eased, behavior: "instant" });
@@ -570,7 +570,18 @@ if (typeof document !== "undefined") {
       return;
     }
     result.hidden = false;
-    moveTo("#result-title");
+
+// Fookus pealkirjale, kerimine kogu kasti algusesse.
+document.querySelector("#result-title").focus({
+  preventScroll: true,
+});
+
+result.style.scrollMarginTop = "32px";
+
+result.scrollIntoView({
+  behavior: reducedMotion.matches ? "instant" : "smooth",
+  block: "start",
+});
   });
   document.querySelector("#restart").addEventListener("click", () => {
     cancelScroll();
