@@ -370,6 +370,7 @@ function showMonkeyIntro(outcome) {
 if (typeof document !== "undefined") {
   setupResultWindow();
   setupPackingButtons();
+  setupMobileMenu();
   let destination = null;
   const items = document.querySelector("#items");
   const result = document.querySelector("#result");
@@ -611,6 +612,44 @@ if (typeof document !== "undefined") {
       .scrollIntoView({ behavior: reducedMotion.matches ? "instant" : "smooth" });
   });
   updatePacking();
+}
+
+function setupMobileMenu() {
+  const menu = document.querySelector("#main-menu") || document.querySelector(".logo-container .links");
+  if (!menu) return;
+  menu.id = "main-menu";
+  let toggle = document.querySelector(".menu-toggle");
+  if (!toggle) {
+    toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "menu-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "main-menu");
+    toggle.setAttribute("aria-label", "Ava menüü");
+    toggle.textContent = "☰";
+    menu.before(toggle);
+  }
+  const closeMenu = () => {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Ava menüü");
+    toggle.textContent = "☰";
+    menu.classList.remove("is-open");
+  };
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Sulge menüü" : "Ava menüü");
+    toggle.textContent = open ? "×" : "☰";
+    menu.classList.toggle("is-open", open);
+  });
+  menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  window.matchMedia("(min-width: 701px)").addEventListener("change", closeMenu);
 }
 
 function setupPackingButtons() {
