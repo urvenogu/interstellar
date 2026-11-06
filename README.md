@@ -1,7 +1,7 @@
 # Interstellar - reis galaktikas
-https://interstellar-three-bice.vercel.app/
-https://www.figma.com/design/QM3jf6dMoDaiOzcsoCn2tX/Interstellar?node-id=73-248&t=Nvz4xc5uCRfepmTG-0
-https://github.com/urvenogu/interstellar/
+1) Public link: https://interstellar-three-bice.vercel.app/
+2) Kujundus: https://www.figma.com/design/QM3jf6dMoDaiOzcsoCn2tX/Interstellar?node-id=73-248&t=Nvz4xc5uCRfepmTG-0
+3) Githubi repo: https://github.com/urvenogu/interstellar/
 
 Millega on tegemist?
 Tegemist on õppimise eesmärgil loodudu kodulehega. 
