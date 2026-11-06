@@ -255,7 +255,6 @@ function setupResultWindow() {
   if (restart) restart.textContent = "Proovi uuesti";
 }
 
-// Ahvide planeet ilmub enne lugu eraldi tumedal ülekattel.
 function showMonkeyIntro(outcome) {
   return new Promise((resolve) => {
     const previousFocus = document.activeElement;
