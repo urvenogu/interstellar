@@ -143,7 +143,7 @@ function createOutcome(destination, selected) {
 if (typeof module !== "undefined")
   module.exports = { createOutcome, equipment, destinations };
 
-// Vastuseakna välimus lisatakse JavaScriptist: HTML-i ja CSS-i ei pea muutma.
+
 function setupResultWindow() {
   const result = document.querySelector("#result");
   const title = document.querySelector("#result-title");
@@ -152,7 +152,7 @@ function setupResultWindow() {
     const styles = document.createElement("style");
     styles.id = "result-window-styles";
     styles.textContent = `
-/* Reisi vastuseaken — keskjoondatud, soe ja läbikumav. */
+
 .result {
   width: calc(100% - 48px);
   max-width: 1120px;
@@ -475,7 +475,7 @@ if (typeof document !== "undefined") {
   }
   items.addEventListener("change", updatePacking);
   document.querySelectorAll(".planet").forEach((planet) => {
-    // Igal planeedil on oma juhuslik amplituud, kestus ja algusfaas.
+    
     planet.style.setProperty("--float-duration", `${7 + Math.random() * 5}s`);
     planet.style.setProperty("--float-delay", `${-Math.random() * 12}s`);
     planet.style.setProperty("--float-x", `${5 + Math.random() * 7}px`);
@@ -689,7 +689,7 @@ function setupPackingButtons() {
         input.checked = false;
       });
 
-      // Uuendab loendurit, esemete saadavust ja tulemuse nuppu.
+      // esemete reset
       packingItems.dispatchEvent(new Event("change", { bubbles: true }));
     });
 
@@ -704,7 +704,7 @@ const reducedMotion = window.matchMedia(
 function updateParallax() {
   if (!backgroundImage) return;
 
-  // Taust liigub maksimaalselt 60 pikslit.
+  // Tausta liikumine
   const movement = reducedMotion.matches
     ? 0
     : Math.min(window.scrollY * 0.15, 100);

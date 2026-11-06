@@ -511,7 +511,7 @@ header {
   }
 }
 
-/* Valikuvoog ja reisi tulemus */
+
 .planets.has-selection .planet[aria-pressed="false"] img {
   filter: grayscale(1);
   opacity: 0.65;
@@ -606,7 +606,7 @@ header {
   }
 }
 
-/* Planeet ja tema infoaken liiguvad ühise elemendina. */
+
 .planet {
   animation: planet-float var(--float-duration, 20s) ease-in-out var(--float-delay, 0s)
     infinite;
@@ -702,8 +702,7 @@ header {
   }
 }
 
-/* Läbipaistvad pildiservad ei tohi naaberplaneedi hiirt kinni püüda.
-   Eraldi tabamisala jätab pildi ja infoakna lõikamata. */
+
 .planet {
   pointer-events: none;
 }
@@ -801,7 +800,7 @@ header {
   line-height: 1.25;
   text-align: center;
 }
-/* Ettevõtte lugu lõpetab lehe ilma pika tühja sabata. */
+
 .page:has(.about) {
   min-height: 0;
 }
@@ -1010,7 +1009,7 @@ header {
 html {
   scroll-behavior: smooth;
 }
-/* Üks püstine taustapilt katab ekraani igal lehe pikkusel. */
+
 .cosmos {
   position: fixed;
   inset: 0;
@@ -1024,7 +1023,7 @@ html {
   top: 50%;
   left: 50%;
 
-  /* Lisaruum takistab liikumisel tühjade servade tekkimist */
+
   width: calc(100vh + 240px);
   width: calc(100dvh + 240px);
   height: calc(100vw + 240px);
@@ -1035,7 +1034,7 @@ html {
     translate(-50%, calc(-50% + var(--parallax-y, 0px)))
     rotate(90deg);
 }
-/* Hero pilt ei määra teiste lehe piltide mõõte. */
+
 .image_hero img {
   display: block;
   max-width: 100%;
@@ -1133,7 +1132,7 @@ html {
   }
 }
 
-/* Mobiilimenüü: tahvelarvutis ja suuremal ekraanil on lingid nähtaval. */
+
 .menu-toggle { display: none; }
 @media (max-width: 700px) {
   .logo-container { position: relative; flex-direction: row; justify-content: space-between; flex-wrap: wrap; width: 100%; }
@@ -1172,4 +1171,25 @@ html {
   .image_hero img {
     animation: none;
   }
+}
+.space-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.space-lines path {
+  fill: none;
+  stroke: #28629d;
+  stroke-width: 2;
+  stroke-dasharray: 3 5;
+  stroke-linecap: round;
+  opacity: 0.2;
+}
+
+.space-lines circle {
+  fill: #28629d;
+  opacity: 0.2;
 }
