@@ -697,3 +697,25 @@ function setupPackingButtons() {
     buttons.append(repackButton);
   }
 }
+const backgroundImage = document.querySelector(".cosmos img");
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
+
+function updateParallax() {
+  if (!backgroundImage) return;
+
+  // Taust liigub maksimaalselt 60 pikslit.
+  const movement = reducedMotion.matches
+    ? 0
+    : Math.min(window.scrollY * 0.08, 60);
+
+  backgroundImage.style.setProperty(
+    "--parallax-y",
+    `${movement}px`
+  );
+}
+
+window.addEventListener("scroll", updateParallax, { passive: true });
+reducedMotion.addEventListener("change", updateParallax);
+updateParallax();

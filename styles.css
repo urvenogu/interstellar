@@ -1023,12 +1023,17 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100vh;
-  width: 100dvh;
-  height: 100vw;
+
+  /* Lisaruum takistab liikumisel tühjade servade tekkimist */
+  width: calc(100vh + 160px);
+  width: calc(100dvh + 160px);
+  height: calc(100vw + 160px);
   max-width: none;
+
   object-fit: cover;
-  transform: translate(-50%, -50%) rotate(90deg);
+  transform:
+    translate(-50%, calc(-50% + var(--parallax-y, 0px)))
+    rotate(90deg);
 }
 /* Hero pilt ei määra teiste lehe piltide mõõte. */
 .image_hero img {
