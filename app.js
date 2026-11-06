@@ -37,6 +37,9 @@ const customPlanetStories = {
   },
 };
 
+// Liikumise ja loo ilmumise ajad (millisekundites).
+const timing = { scrollDelay: 250, scrollDuration: 1200, monkeyStoryDelay: 1500 };
+
 function createOutcome(destination, selected) {
   if (
     !destinations.includes(destination) ||
@@ -339,7 +342,7 @@ function showMonkeyIntro(outcome) {
       timer = window.setTimeout(() => {
         story.hidden = false;
         dialog.classList.add("has-story");
-      }, 1500);
+      }, timing.monkeyStoryDelay);
     }
     image.addEventListener("load", scheduleStory, { once: true });
     image.addEventListener("error", scheduleStory, { once: true });
@@ -365,6 +368,8 @@ function showMonkeyIntro(outcome) {
 
 if (typeof document !== "undefined") {
   setupResultWindow();
+  setupPackingButtons();
+  setupMobileMenu();
   let destination = null;
   const items = document.querySelector("#items");
   const result = document.querySelector("#result");
@@ -396,8 +401,11 @@ if (typeof document !== "undefined") {
       window.addEventListener("touchstart", stop, { passive: true });
       window.addEventListener("keydown", stop);
       function animate(time) {
-        if (started === undefined) started = time + 350;
-        const progress = Math.max(0, Math.min(1, (time - started) / 1800));
+        if (started === undefined) started = time + timing.scrollDelay;
+        const progress = Math.max(
+          0,
+          Math.min(1, (time - started) / timing.scrollDuration),
+        );
         const eased =
           progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
         window.scrollTo({ top: start + (end - start) * eased, behavior: "instant" });
@@ -425,7 +433,7 @@ if (typeof document !== "undefined") {
   const inputs = [...items.querySelectorAll("input")];
   const selectedItems = () =>
     inputs.filter((input) => input.checked).map((input) => input.value);
-  
+
   const packingHint = document.querySelector("#selected-destination");
   let packingWarningTimeout;
 
@@ -445,7 +453,7 @@ if (typeof document !== "undefined") {
       showPackingWarning();
     }
   });
-  
+
   function updatePacking() {
     clearTimeout(packingWarningTimeout);
     packingHint.classList.remove("is-warning");
@@ -559,6 +567,7 @@ if (typeof document !== "undefined") {
       effects.append(li);
     });
     if (monkeyEnding) {
+      result.hidden = true;
       cancelScroll();
       monkeyIntroOpen = true;
       try {
@@ -568,8 +577,20 @@ if (typeof document !== "undefined") {
       }
       return;
     }
+    cancelScroll();
     result.hidden = false;
-    moveTo("#result-title");
+
+    // Fookus pealkirjale, kerimine kogu kasti algusesse.
+    document.querySelector("#result-title").focus({
+      preventScroll: true,
+    });
+
+    result.style.scrollMarginTop = "32px";
+
+    result.scrollIntoView({
+      behavior: reducedMotion.matches ? "instant" : "smooth",
+      block: "start",
+    });
   });
   document.querySelector("#restart").addEventListener("click", () => {
     cancelScroll();
@@ -592,3 +613,108 @@ if (typeof document !== "undefined") {
   updatePacking();
 }
 
+function setupMobileMenu() {
+  const menu = document.querySelector("#main-menu") || document.querySelector(".logo-container .links");
+  if (!menu) return;
+  menu.id = "main-menu";
+  let toggle = document.querySelector(".menu-toggle");
+  if (!toggle) {
+    toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "menu-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "main-menu");
+    toggle.setAttribute("aria-label", "Ava menüü");
+    toggle.textContent = "☰";
+    menu.before(toggle);
+  }
+  const closeMenu = () => {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Ava menüü");
+    toggle.textContent = "☰";
+    menu.classList.remove("is-open");
+  };
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Sulge menüü" : "Ava menüü");
+    toggle.textContent = open ? "×" : "☰";
+    menu.classList.toggle("is-open", open);
+  });
+  menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  window.matchMedia("(min-width: 701px)").addEventListener("change", closeMenu);
+}
+
+function setupPackingButtons() {
+  const packingResultButton = document.querySelector("#show-result");
+  const packingItems = document.querySelector("#items");
+
+  if (packingResultButton && packingItems && !document.querySelector("#repack-button")) {
+    const buttons = document.createElement("div");
+
+    Object.assign(buttons.style, {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: "16px",
+      marginTop: "24px",
+      marginBottom: "80px",
+    });
+
+    packingResultButton.before(buttons);
+    buttons.append(packingResultButton);
+    packingResultButton.style.marginTop = "0";
+
+    const repackButton = document.createElement("button");
+    repackButton.id = "repack-button";
+    repackButton.type = "button";
+    repackButton.className = "action";
+    repackButton.textContent = "Paki ümber ↻";
+
+    Object.assign(repackButton.style, {
+      background: "#00ffb7",
+      borderColor: "#00ffb7",
+      color: "#090f24",
+      marginTop: "0",
+    });
+
+    repackButton.addEventListener("click", () => {
+      packingItems.querySelectorAll("input[type='checkbox']").forEach((input) => {
+        input.checked = false;
+      });
+
+      // Uuendab loendurit, esemete saadavust ja tulemuse nuppu.
+      packingItems.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
+    buttons.append(repackButton);
+  }
+}
+const backgroundImage = document.querySelector(".cosmos img");
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
+
+function updateParallax() {
+  if (!backgroundImage) return;
+
+  // Taust liigub maksimaalselt 60 pikslit.
+  const movement = reducedMotion.matches
+    ? 0
+    : Math.min(window.scrollY * 0.15, 100);
+
+  backgroundImage.style.setProperty(
+    "--parallax-y",
+    `${movement}px`
+  );
+}
+
+window.addEventListener("scroll", updateParallax, { passive: true });
+reducedMotion.addEventListener("change", updateParallax);
+updateParallax();
